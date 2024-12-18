@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>駕駛距離計算器</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <style>
+        body {
+    height: 600px;
+    background-color: black;
+    color:white;
+    display: flex;
+    flex-direction: column; /* 垂直排列內容 */
+}
+
+#map {
+    width: 80%;
+    height: 700px;
+    float: left;
+}
+
+#controls {
+    width: 20%;
+    padding: 10px;
+    float: right;
+}
+
+button {
+    background-color: black;
+    color :white;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+button:hover{
+    border: yellow solid 0.5px;
+}
+#routeInfo {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: black;
+    border-radius: 5px;
+}
+
+#pointManagement {
+            margin-top: 10px;
+            padding: 5px;
+            background-color: black;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 999;
+            max-height: 200px;
+            overflow-y: auto;
+            transition: width 0.3s ease; /* 使面板展開和縮進時有過渡效果 */
+        }
+
+        #pointManagement.collapsed {
+            width: 40px; /* 面板縮進後的寬度 */
+        }
+
+        #pointManagement .collapsed ul {
+            display: none; /* 隱藏列表 */
+        }
+
+        #toggleArrow {
+            cursor: pointer;
+            font-size: 20px;
+            color: white;
+            background-color: red;
+            border: none;
+            border-radius: 90%;
+        }
+
+        #toggleArrow.collapsed {
+            transform: rotate(180deg);
+            background-color: white; /* 改變箭頭的方向 */
+        }
+
+        #pointList li {
+            margin: 5px 0;
+        }
+
+        #pointList button {
+            margin-left: 10px;
+        }
+
+
+#distance {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+#selectedPointInfo {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* 自訂路由控制位置 */
+.leaflet-routing-container {
+    position: absolute;
+    top: 100px; /* 設置控制器在頁面上方 */
+    left: 80%; /* 使其顯示在地圖的右側 */
+    z-index: 1000; /* 確保控制器在地圖上方 */
+    height: 300px; /* 設置固定高度 */
+    width: 250px; /* 控制容器寬度 */
+    overflow-y: auto; /* 允許滾動以查看超出範圍的內容 */
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明背景 */
+    border-radius: 10px; /* 圓角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 投影效果 */
+}
+
+
+    </style>
+</head>
+<body>
+    <body>
+        <h1>駕駛距離計算器</h1>
+        <div id="map"></div>
+    
+        <div id="controls">
+            <button id="setStart">設置起點</button>
+            <button id="setEnd">設置終點</button>
+            <button id="addWaypoint">新增停靠點</button>
+            <button id="clearRoute">清除路線</button>
+        </div>
+    
+        <div id="routeInfo">
+            <h3>路線信息</h3>
+            <div id="selectedPointInfo"></div>
+            <div id="distance"></div>
+        </div>
+    
+        <div id="pointManagement">
+            <h3>點管理</h3>
+            <button id="toggleArrow" style="position: absolute; top: 10px; right: 10px; background: none; border: none; color: white; font-size: 20px;">&#8594;</button> <!-- 箭頭按鈕 -->
+            <ul id="pointList">
+                <!-- 點的列表會顯示在這裡 -->
+            </ul>
+        </div>
+
+    
+
+    <script>
+        // 初始化地圖
+        const map = L.map('map').setView([35.6762, 139.6503], 13);  // 設定地圖初始位置，這裡使用的是東京的坐標
+
+        // 加載OpenStreetMap地圖圖層
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // 初始化路線控制
+        const routingControl = L.Routing.control({
+            waypoints: [],  // 初始沒有設定路徑
+            routeWhileDragging: true,  // 允許在拖動時即時顯示路線
+            createMarker: function() { return null; }  // 不顯示標記
+        }).addTo(map);
+
+        // 將路由控制器移動到外部容器
+        const routingControlElement = document.querySelector('.leaflet-routing-container');
+        const externalControlContainer = document.createElement('div');
+        externalControlContainer.className = 'leaflet-routing-external-container';
+        document.body.appendChild(externalControlContainer);
+        externalControlContainer.appendChild(routingControlElement);  // 將控制器移動到外部容器
+
+        // 儲存標記資料
+        const points = {
+            start: null,
+            end: null,
+            waypoints: []
+        };
+
+        const markers = {}; // 用來存儲標記的Layer，以便管理
+
+        // 設置目前選擇的點類型
+        let currentPointType = 'start';  // 預設為起點
+
+        // 點擊地圖來設置不同的點
+        map.on('click', function(e) {
+            const latlng = e.latlng;
+
+            if (currentPointType === 'start') {
+                // 如果已經有起點，先刪除舊的
+                if (points.start) {
+                    removeMarker('start');
+                }
+                // 設置新的起點
+                points.start = latlng;
+                addMarker('start', points.start);
+            }
+            else if (currentPointType === 'end') {
+                // 如果已經有終點，先刪除舊的
+                if (points.end) {
+                    removeMarker('end');
+                }
+                // 設置新的終點
+                points.end = latlng;
+                addMarker('end', points.end);
+            }
+            else if (currentPointType === 'waypoint') {
+                // 新增停靠點
+                points.waypoints.push(latlng);
+                addMarker('waypoint', latlng);
+            }
+
+            // 更新路線
+            updateRoute();
+        });
+
+        // 添加標記
+        function addMarker(type, latlng) {
+            let marker = L.marker(latlng).addTo(map).bindPopup(type === 'start' ? "起點" : type === 'end' ? "終點" : "停靠點").openPopup();
+            markers[type] = markers[type] || [];  // 保證每種類型都有一個列表
+            markers[type].push({ latlng, marker });  // 儲存標記
+
+            updatePointList(); // 更新點列表
+        }
+
+        // 刪除標記
+        function removeMarker(type, index = null) {
+            if (markers[type]) {
+                if (index === null) {
+                    // 如果沒有指定 index，就刪除所有
+                    markers[type].forEach(item => {
+                        map.removeLayer(item.marker);  // 移除地圖上的標記
+                    });
+                    markers[type] = [];  // 清空該類型的標記資料
+                } else {
+                    // 刪除指定的某個標記
+                    const item = markers[type][index];
+                    map.removeLayer(item.marker);  // 移除地圖上的標記
+                    markers[type].splice(index, 1);  // 刪除指定的標記資料
+                }
+            }
+        }
+
+        // 更新路線
+        function updateRoute() {
+            const allWaypoints = [points.start, ...points.waypoints, points.end].filter(Boolean);  // 排除空值
+            routingControl.setWaypoints(allWaypoints);
+        }
+
+        // 更新點列表
+       // 更新點列表
+function updatePointList() {
+    const pointList = document.getElementById('pointList');
+    pointList.innerHTML = ''; // 清空現有列表
+
+    // 顯示標記列表
+    if (points.start) {
+        const li = document.createElement('li');
+        li.textContent = `起點: ${points.start.lat.toFixed(4)}, ${points.start.lng.toFixed(4)}`;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '刪除';
+        deleteButton.onclick = () => {
+            removeMarker('start');
+            points.start = null;
+            updateRoute();
+            updatePointList();
+        };
+        const moveButton = document.createElement('button');
+        moveButton.textContent = '移動到此點';
+        moveButton.onclick = () => {
+            map.setView(points.start, 16); // 移動地圖到起點
+        };
+        li.appendChild(deleteButton);
+        li.appendChild(moveButton);
+        pointList.appendChild(li);
+    }
+
+    if (points.end) {
+        const li = document.createElement('li');
+        li.textContent = `終點: ${points.end.lat.toFixed(4)}, ${points.end.lng.toFixed(4)}`;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '刪除';
+        deleteButton.onclick = () => {
+            removeMarker('end');
+            points.end = null;
+            updateRoute();
+            updatePointList();
+        };
+        const moveButton = document.createElement('button');
+        moveButton.textContent = '移動到此點';
+        moveButton.onclick = () => {
+            map.setView(points.end, 16); // 移動地圖到終點
+        };
+        li.appendChild(deleteButton);
+        li.appendChild(moveButton);
+        pointList.appendChild(li);
+    }
+
+    points.waypoints.forEach((waypoint, index) => {
+        const li = document.createElement('li');
+        li.textContent = `停靠點 ${index + 1}: ${waypoint.lat.toFixed(4)}, ${waypoint.lng.toFixed(4)}`;
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = '刪除';
+        deleteButton.onclick = () => {
+            removeMarker('waypoint', index); // 刪除指定的停靠點
+            points.waypoints.splice(index, 1); // 刪除該停靠點
+            updateRoute();
+            updatePointList();
+        };
+        const moveButton = document.createElement('button');
+        moveButton.textContent = '移動到此點';
+        moveButton.onclick = () => {
+            map.setView(waypoint, 16); // 移動地圖到該停靠點
+        };
+        li.appendChild(deleteButton);
+        li.appendChild(moveButton);
+        pointList.appendChild(li);
+    });
+}
+
+
+        // 設置起點按鈕
+        document.getElementById('setStart').addEventListener('click', function() {
+            currentPointType = 'start';
+            document.getElementById('selectedPointInfo').innerHTML = '選擇設置起點位置';
+        });
+
+        // 設置終點按鈕
+        document.getElementById('setEnd').addEventListener('click', function() {
+            currentPointType = 'end';
+            document.getElementById('selectedPointInfo').innerHTML = '選擇設置終點位置';
+        });
+
+        // 新增停靠點按鈕
+        document.getElementById('addWaypoint').addEventListener('click', function() {
+            currentPointType = 'waypoint';
+            document.getElementById('selectedPointInfo').innerHTML = '選擇設置停靠點位置';
+        });
+
+        // 清除路線按鈕
+// 清除路線按鈕
+document.getElementById('clearRoute').addEventListener('click', function() {
+    points.start = null;
+    points.end = null;
+    points.waypoints = [];
+    markers.start.forEach(item => map.removeLayer(item.marker));  // 移除起點標記
+    markers.end.forEach(item => map.removeLayer(item.marker));    // 移除終點標記
+    markers.waypoint.forEach(item => map.removeLayer(item.marker));  // 移除停靠點標記
+    markers.start = []; // 清空起點標記列表
+    markers.end = [];   // 清空終點標記列表
+    markers.waypoint = []; // 清空停靠點標記列表
+    updateRoute();
+    updatePointList();
+});
+
+document.getElementById('toggleArrow').addEventListener('click', function() {
+            const pointManagement = document.getElementById('pointManagement');
+            const toggleArrow = document.getElementById('toggleArrow');
+
+            pointManagement.classList.toggle('collapsed');
+            toggleArrow.classList.toggle('collapsed');
+
+            if (pointManagement.classList.contains('collapsed')) {
+                toggleArrow.innerHTML = '&#8592;'; // 顯示左箭頭
+            } else {
+                toggleArrow.innerHTML = '&#8594;'; // 顯示右箭頭
+            }
+        });
+
+
+        // 查看路線按鈕
+        document.getElementById('viewRoute').addEventListener('click', function() {
+            if (points.start && points.end) {
+                const distance = routingControl.getRoutes()[0].summary.totalDistance;  // 總距離
+                const time = routingControl.getRoutes()[0].summary.totalTime / 60;  // 預計時間（分鐘）
+                document.getElementById('distance').innerHTML = `距離: ${(distance / 1000).toFixed(2)} km, 預計時間: ${time.toFixed(2)} 分鐘`;
+            }
+        });
+    </script>
+</body>
+</html>

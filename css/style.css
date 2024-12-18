@@ -1,0 +1,496 @@
+body{
+    margin : 0 ;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+p{
+    margin: 90px;
+}
+
+header {
+    display: flex;
+    justify-content:center; 
+    align-items: flex-end; 
+    height: 200px;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)),
+        url('/assets/header_expressway.jpg') center/cover no-repeat;
+    background-blend-mode: overlay; /*gpt*/
+
+}
+
+header button{
+    background: rgba(0,0,0,0);
+    border: none;
+    color:white;
+    cursor:pointer;
+    font-size: 30px;
+    text-align: center;
+    transition: background 0.3s;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+nav button:hover {
+    background-color: #0056b3;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(to bottom, #000000, #1a1a1a, #000000); 
+    color: #ffffff; 
+    font-family: Arial, sans-serif;
+}
+
+section{
+    text-align: center;
+}
+
+.home01 img {
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+}
+
+.home01 img:hover {
+    transform: scale(1.3); 
+}
+
+/*-------- 下面gpt-*/
+.section {
+    display: none; 
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+/*---------*/
+
+#historical-image{
+    width: 600px;
+    height: 600px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 700px 1fr;
+}
+
+.event{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.container p{
+    margin: 10px;
+
+}
+
+.slider{
+    width: 600px;
+}
+
+/*---------*/
+
+.pics{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.pics p{
+    margin: 20px;
+}
+
+.pics img{
+    width: 80%;
+}
+
+/*---------*/
+.realmap{
+    width: 100%;
+    height: 100%;
+}
+
+.mapbtn{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.mapmap{
+    display: grid;
+    grid-template-columns: 4fr 2fr;
+    margin-top: 10px;
+}
+
+.mapbtn div button{
+    border : none;
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    height: 100px;
+    cursor: pointer;
+    transition: transform 0.5s ease; 
+}
+
+.mapbtn div button:hover{
+    background-color: rgb(6, 39, 158);
+    color:white;
+}
+
+#info{
+    font-size: 20px;
+}
+
+.mapfade{
+    animation: fadeIn 0.5s ease-in-out;
+}
+/*--------- 下面gpt*/
+
+.container2{
+    display: flex;
+    width: 100%;
+    height: 70vh;
+}
+
+.box {
+    flex: 1;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: flex 0.5s ease; /* 讓寬度過渡平滑 */
+  }
+
+  .left {
+    background-color: rgb(83, 73, 73);
+  }
+
+  .right {
+    background-color: #380d08;
+  }
+  .content {
+    font-size: 20px;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0s 0.3s;
+  }
+
+  /* 當滑鼠移動到左邊時，左邊放大，右邊縮小 */
+  .left:hover {
+    flex: 2; /* 放大，佔據更多空間 */
+  }
+
+  /* 當滑鼠移動到右邊時，右邊放大，左邊縮小 */
+  .right:hover {
+    flex: 2; /* 放大，佔據更多空間 */
+  }
+
+  /* 顯示內容 */
+  .box:hover .content {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s, visibility 0s 0s;
+  }
+/*--------- 下面gpt*/
+
+.ani {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+
+  }
+
+.wangan{
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #d5cfcf;
+    border-radius: 10px;
+    cursor: pointer;
+    width:30%;
+    height: 200px;
+    transform: transform 0.7s ease;
+}
+.wangan:hover{
+    border: 1px solid #d9f00c;
+}
+
+.wangan img {
+    margin-bottom: 10px;
+    width: 130px;
+    border-radius: 8px;
+  }
+
+.modal {
+    position: fixed;
+    display: none;
+    top: 40%;
+    left: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, -50%)
+  }
+
+
+  .modal-content {
+    width: 800px;
+    height: 600px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+  }
+
+  #modal-description{
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+  }
+
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+/*---------*/
+
+.photos {
+    margin: 0;
+    height: 180vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 20px; 
+}
+
+.p1, .p3 {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 10px;
+    width: 95%; 
+}
+
+.p2 {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    gap: 10px;
+    width: 95%; 
+}
+
+.p1 div, .p2 div, .p3 div {
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 100%; 
+    height: 100%;
+    margin-left: 30px;
+    position: relative;
+}
+
+.p1,.p2,.p3{
+    cursor: pointer;
+    align-items: center;
+    height: 400px;
+}
+
+.photoarea{
+    z-index: 2;
+    position: fixed;
+    display: none;
+    top: 50%;
+    left: 50%;
+    background-color: rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    transform: translate(-50%, -50%)
+}
+
+.photo-content{
+    width: 1280px;
+    height: 760px;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+  }
+.photo {
+    width: 1280px;
+    height: 760px;
+    transition: opacity 0.5s ease-in-out;  
+    opacity: 0;
+}
+.photo.show {
+    opacity: 1;
+}
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+.show{
+    width: 100%;
+    height: 100%;
+}
+
+
+.showmsg{
+    position: absolute;
+    top : 10px;
+    left: 10px;
+    z-index: 1;
+}
+
+/*------------*/
+
+.direction{
+    width: 1200px;
+    height: 800px;
+}
+
+/*------------*/
+.otherinfo{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap:10px;
+    height: 100vh;
+}
+
+.videorow{
+    background-color: black;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.video{
+    margin-left: 2px;
+    margin-right: 2px;
+    background-color: black;
+    position: relative;
+    border: #ffffff solid;
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+}
+
+.video:hover{
+    border: #d9f00c solid;
+    .videoword{
+        color:#d9f00c;
+    }
+}
+
+.yticon{
+    position: absolute; 
+    background-color: blue;
+    z-index: 200;
+    top:5px;
+    left:5px;
+    right: 5px;
+    bottom: 60px;
+    
+}
+
+.videoword{
+    background-color: rgba(0,0,0,0);
+    position: absolute;
+    bottom:5px;
+    left:5px;
+    right: 5px;
+    top:200px;
+    font-size: 30px;
+}
+
+
+
+.videopic{
+    width: 100%;
+    height: 100%;
+}
+
+/*--------------*/
+.comment{
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    border: #ffffff solid;
+    gap:10px;
+    height: 250px;
+}
+
+.usercom{
+    text-align: left;
+    align-items: center;
+    padding-left: 10px;
+    max-width: 300px;
+    overflow-y: auto;
+}
+
+.pus{
+    display: grid;
+    grid-template-columns: 2fr 2fr 5fr 1fr;
+    margin-bottom: 10px;
+}
+#who,#pic,#comment{
+    background-color: rgba(0,0,0,0);
+    color: white;
+    border: none;
+    height: 100%;
+}
+
+#who:hover, #pic:hover ,#comment:hover{
+    border-bottom: #ffffff solid;
+}
+
+.submitbtn{
+    border-radius: 4px;
+    border: #ffffff solid ;
+    background-color: #1a1a1a;
+    color:white;
+    height: 100%;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submitbtn:hover{
+    background-color: #0056b3;
+}
+
+/*--------------*/
+

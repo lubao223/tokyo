@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>首都高介紹</title>
+        <link rel="stylesheet" href="./css/style.css">
+        <script src="./js/script.js"></script>
+        <script src="./js/year.js"></script>
+        <script src="js/map.js"></script>
+        <script src="js/web.js"></script>
+        
+
+       
+    </head>
+    <body>
+        <header>
+            <nav>
+                <button onclick="showSection('section1')">首頁</button>
+                <button onclick="showSection('section2')">歷史</button>
+                <button onclick="showSection('section3')">賽車文化</button>
+                <button onclick="showSection('section4')">主要路線</button>
+                <button onclick="showSection('section5')">改裝文化</button>
+                <button onclick="showSection('section6')">遊戲與媒體</button>
+                <button onclick="showSection('section7')">相片</button>
+                <button onclick="showSection('section8')">導航規劃</button>
+                <button onclick="showSection('section9')">相關資源</button>
+                <button onclick="showSection('section10')">留言板</button>
+            </nav>
+        </header>
+        <br>
+        <main>
+            <section id="section1" class="section active">
+                <h1>穿梭都市夜景，感受首都高文化魅力</h1>
+                <h5>探索8、90年代風靡一時的日本高速公路文化——速度、自由與冒險</h5>
+                <p>那個時期的日本，高速公路不僅是城市間的交通命脈，它還是無數年輕人追求速度與自由的象徵。當時的街頭賽車、改裝車文化以及深夜駛過的車隊，成為了都市傳說中的一部分。那個時代的首都高，是一個開放的舞台，充滿著激情與冒險。從隨著車輛呼嘯而過的音浪到駕駛者們無所畏懼的眼神，每一條高速公路都見證著自由的精神。探索這段歷史，仿佛回到了那個充滿活力的年代，重新感受當時所謂的速度與激情。</p>
+                <div class="home01">
+                    <img src="/assets/s01.jpeg">
+                    <img src="/assets/s02.jpg">
+                    <img src="assets/s03.jpg">
+                </div>
+            </section>
+
+            <section id="section2" class="section">
+                <div class="container">
+                    <div>
+                        <div class="image-wrapper">
+                            <img id="historical-image" src="assets/year/1959.jpg" alt="首都高速歷史">
+                        </div>
+                    </div>
+                    <div>
+                        <a style="display: block; color:yellow;" href="https://www.shutoko.jp/fun/history/" target="_blank">資料來源</a>
+                        <input type="range" min="1959" max="2024" value="1959" class="slider" id="yearSlider">
+                        <div class="year-display" id="yearDisplay">1959年</div>
+                        <div>
+                            <p>歷史事件</p>
+                            <p  class="event" id="event">6月17日: 首都高速道路公團誕生。</p>
+                        </div>
+                    </div>
+                </div>   
+            </section>
+
+            <section id="section3" class="section">
+                <h1>賽車文化</h1>
+                <a style="display: block; color:yellow;" href="https://www.youcheyihou.com/news/130831" target="_blank">資料來源</a>
+                <p>
+                    70年代初期，東京地下飆車組織很分散，警方的管制，使得競速地點來到了東名。從海老明收費站到瀨田·東京收費站的不到30KM的公路上，夜夜笙歌。其中的車手有大部分現在已經成為改裝界的扛把子級人物。
+                </p>
+                <hr>
+                <div class="pics">
+                    <div>
+                        <img src="./assets/p01.jpg">
+                        <p>
+
+                            稻田大二郎（左）：被稱為不死之身的男人，Option、D1 GP、TAS創始人，被稱為日本改裝界的「活化石」。
+                            
+                            雨宮勇美（右）：雨宮創始人，到如今還是雨宮的主理人。</p>
+                    </div>
+                    <div>
+                        <img src="./assets/p02.jpg">
+                        <p>
+
+                            吉田榮一：MPW車主理人，80年代中期Mid Night Club會長，灣岸中黑鳥駕駛原型人物。此生摯愛保時捷。 2018年11月因詐欺罪被判入獄。</p>
+                    </div>
+                    <div>
+                        <img src="./assets/p03.jpg">
+                        <p>
+
+                            大川光一：曾任TRUST首席工程師，Group C賽車手，第一位使用日本國產街車突破300KM/h的駕駛者。</p>
+                    </div>
+                </div>
+                <hr>
+                <p>
+                    <img style="width: 600px;" src="./assets/p04.jpg">
+                    <br>
+                    <br>
+                    80年代中期，東名高速上漸漸出現了張貼著mid night貼紙的保時捷軍團，而會長就是剛才提及的吉田榮一。
+                    
+                    由於政府的大力施壓，東名時代於80年代末期結束，戰場轉至灣岸線。其中有些人止步於東名高速──東永先生，東永先生與大川先生是好友關係，在一次碰面結束後的回程路上，與自己的Pantera永眠於東名高速上。
+                </p>
+                <hr>
+                <h3>午夜傳說</h3>
+                <p>Mid Night Club正式成立於1987年，當時灣岸線上的暴走族非常猖獗，為了滅一滅暴走族的威風，吉田榮一建立了Mid Night Club，而加入Mid Night Club很難，這點使得Mid Night Club尤為特殊。大多數車隊會接受任何車手，但Mid Night不同。加入車隊需要的第一個條件就是車子必須夠快（長時間維持250km/h），因此能跑上300km/h的賽車非常普遍。
+                    當新成員加入Mid Night club時，他們都會被視為一年的學徒。為期一年的觀察期結束後，最終只有10％的車手有資格獲得正式會員資格。
+                    但是條件沒有止步於此，非常嚴格的保密製度同時也是俱樂部的守則之一，所有關於姓名，地址，職業，成員如何賺錢以改裝汽車的信息都受到高度保護，並且從未洩露給俱樂部內外的任何人。
+                    最後也是最重要的一條規矩，俱樂部成員不准對其他司機和其他成員構成任何類型的危險，如果你做出了這種行為，那麼你就可以收拾行李走人了
+                </p>
+                <p>隨著車隊的名氣愈加壯大，有些非組織的車手也開始貼上Mid Night組織的貼紙，如果讓會內成員發現，首先會警告，而警告無效的結果就是——砸車。
+                    在初期，俱樂部有30名成員，但到了90年代中期，Mid Night大約有75名成員。
+                     有趣的是，在當時漂移也很受歡迎，但是Mid Night從來沒有漂過，他們的座右銘是「漂移和越野是為了弱者」。速度是檢驗真理的唯一標準！
+                </p>
+                <hr>
+                <h3>週日凌晨3點的戰鬥</h3>
+                <img style="width: 600px;" src="./assets/p05.jpg">
+                <img style="width: 600px;" src="./assets/p06.jpg">
+                <p>
+                    灣岸線即使是深夜也會有很多社會車輛行駛，但一周內唯一一個灣岸線通透的瞬間是在周日凌晨的三點，從三點到四點這一小時內，是所有成員衝擊最高時速的「黃金一小時」。而唯一可以衝擊最高時速的地點則是駛過川崎隧道後，到終點大黑PA的7~8KM這個區間（順便說下，平均速度300KM/h的情況下跑完這段路程僅需90s），可以跑出最高速地點則是快進入大黑PA之前的鶴見翼橋上。
+                </p>
+                <hr>
+                <h3>組織的破碎</h3>
+                <p>
+                    即使有著這麽嚴格的規章制度，但是俗話說得好，常在河邊站哪有不濕鞋，在1999年一個不知名的星期五晚上大約淩晨3點，Bosozoku的成員行駛在灣岸線上，與Mid Night Club 成員發生沖突。但是最終沖突演變為了一場比賽，賽車進入了一片交通擁堵的路段，但是不幸的是Bosozoku騎手失去了控制，以每小時超過250KM/h，撞上了路上正常行駛的車輛，最終導致了巨大的連環撞車事故。事故造成1死8傷，其中6人是與組織無關的社會行駛車輛。
+                    俱樂部初期建立時，就明確表明了如果有人在俱樂部存在期間死亡，無論是他們是賽車手，或者是正常駕車者，不論是間接的還是直接的，俱樂部只要有這種事情發生便會解散。
+                    但是組織在明面解散了車隊，大部分成員還是在繼續奔跑著，到今天為止，據說組織內的人還有6人還在跑，但是地點已經不在灣岸線。
+                </p>
+            </section>
+
+            <section id="section4" class="section">
+                <a style="display: block; color:yellow;" href="https://www.auto-online.com.tw/news/46-1009" target="_blank">資料來源</a>
+                <div class="mapfade">
+                    <div class="mapmap">
+                    <img src="assets/map/mp01.png" id="mapmap" class="realmap">
+                    <p id="info">本路線是在灣岸橫濱線剛開通的1994年春天那時所流行的路線，當時由於市川—東海段尚未完全通車，因此完整的懷舊路線應該是「市川PA」→「灣岸線」→「東海JCT」→「橫羽線」→「跨海大橋」。對於不少老一輩的日本競車族來說，是相當能夠引發懷舊之情的路線。</p>
+                    </div>
+
+                    <div class="mapbtn">
+                        <div>
+                            <button onclick="getinfo('懷舊路線')">懷舊路線</button>
+                        </div>
+                        <div>
+                            <button onclick="getinfo('C1環狀線')">C1環狀線</button>
+                        </div>
+                        <div>
+                            <button onclick="getinfo('平價版灣岸路線')">平價版灣岸路線</button>
+                        </div>
+                        <div>
+                            <button onclick="getinfo('高價版灣岸路線')">高價版灣岸路線</button>
+                        </div>
+                        <div>
+                            <button onclick="getinfo('新環狀線')">新環狀線</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section5" class="section ">
+                <div class="container2">
+                    <div class="box left">
+                        <div class="content">
+                          <h2>速度改裝</h2>
+                          <h5>為了適應這種環境，賽車手通常會對車輛進行多方面的改裝。常見的改裝包括渦輪增壓系統來提升動力、運動型懸吊和煞車系統以增強操控性和煞車性能，以及空氣動力學改裝來提高高速穩定性。車主們也會透過輕量化和寬輪胎來提升加速和抓地力，使車輛能夠在複雜的賽道中展現出更強的性能。首都高的賽車文化因此成為了速度與技術的結合，吸引了許多車迷與賽車手的參與。</h5>
+                          <img src="assets/img20200307_20070193-1024x683.webp" alt="Left Image" width="80%">
+                        </div>
+                      </div>
+                      <div class="box right">
+                        <div class="content">
+                          <h2>個性化改裝</h2>
+                          <h5>這類改裝通常不僅限於性能提升，還包括外觀設計、內裝風格和音響系統等方面。常見的個人化改裝包括車身顏色、車身包圍、客製化車輪、運動座椅、豪華內裝以及高品質音響系統。性能方面，車主可能會選擇提升動力系統（如渦輪增壓）、改裝懸吊系統以增強操控、或安裝高性能煞車系統來提升安全性。個人化改裝使車輛不僅反映車主的獨特品味，還能提供更符合個人駕駛風格的性能表現。</h5>
+                          <img src="assets/9af99_1730_baed57072f102bb40dbb8c5f396c9a4c.jpg" alt="Right Image" width="80%">
+                        </div>
+                      </div>
+                </div>
+            </section>
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                  <span class="close" onclick="closeModal()">&times;</span>
+                  <h2 id="modal-title"></h2>
+                  <span id="modal-description"></span>
+                  <span style="position: fixed;bottom:1px;" id="what"></span>
+                  <video height="600" width="800" controls >
+                    
+                  </video>
+
+                </div>
+              </div>
+
+            <section id="section6" class="section ">
+                <div class="ani">
+                    <div class="wangan" onclick="openw(1)">
+                        <img src="assets/gameicon01.jpg">
+                        <h3>首都高賽車</h3>
+                    </div>
+                    <div class="wangan" onclick="openw(2)">
+                        <img src="assets/440px-WANGAN_MIDNIGHT_MAXIMUM_TUNE_4_20161010_195435.jpg">
+                        <h3>wangan midnight maximum tune</h3>
+                    </div>
+                    <div class="wangan" onclick="openw(3)">
+                        <img src="assets/Wangan_Midnight_Logo.jpg">
+                        <h3>灣岸Midnight</h3>
+                    </div>
+                </div>
+            </section>
+
+            <div class="photoarea" id="photoarea">
+                <div class="photo-content">
+                    <img src="assets/photo/bridge1/tb_02.jpg" alt="photo" class="photo" id="photo">
+                    <span class="close-btn" onclick="closepic()" >&times;</span>
+                    <button class="prev-btn">←</button>
+                    <button class="next-btn">→</button>
+                  </div>
+               
+               
+            </div>
+
+            <section id="section7" class="section">
+                <div class="photos">
+                    <div class="p1">
+                        <div class="p11" onclick="openpic('bridge1')">
+                            <img class="show" src="assets/photo/bridge1/tb_02.jpg">
+                            <span class="showmsg">鶴見翼橋</span>
+                        </div>
+                        <div class="p12" onclick="openpic('c1')">
+                            <img class="show" src="assets/photo/c1/01.jpg">
+                            <span class="showmsg">c1環狀線</span>
+                        </div>
+                    </div>
+                    <div class="p2" >
+                        <div class="p21" onclick="openpic('in')">
+                            <img class="show" src="assets/photo/in/001 (1).jpg">
+                            <span class="showmsg">入口</span>
+                        </div>
+                        <div class="p22" onclick="openpic('pa')">
+                            <img class="show" src="assets/photo/pa/0.jpg">
+                            <span class="showmsg">大黑PA</span>
+                        </div>
+                    </div>
+                    <div class="p3">
+                        <div class="p31" onclick="openpic('rb')">
+                            <img class="show" src="assets/photo/rb/rb_01.jpg">
+                            <span class="showmsg">彩虹大橋</span>
+                        </div>
+                        <div class="p32" onclick="openpic('wangan')">
+                            <img class="show" src="assets/photo/wangan/1000_F_135810014_weCinjwceewZ9wazOQQMtrGEwtqDPWbB.jpg">
+                            <span class="showmsg">灣岸線</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section8" class="section">
+                <iframe src="test.html" class="direction"></iframe>
+            </section>
+
+            
+
+            <section id="section9" class="section">
+                <div class="otherinfo">
+                    <div class="videorow">
+                        <div class="video" onclick="go('https://zh.wikipedia.org/zh-tw/%E9%A6%96%E9%83%BD%E9%AB%98%E9%80%9F%E9%81%93%E8%B7%AF')">
+                            <div class="yticon">
+                                <img src="./assets/videoicon/videoicon01.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                首都高維基百科
+                            </div>
+                        </div>
+                        <div class="video" onclick="go('https://www.shutoko.co.jp/zh-TW/index/')">
+                            <div class="yticon">
+                                <img src="./assets/videoicon/videoicon02.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                首都高速道路株式会社
+                            </div>
+                        </div>
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://tw.driveplaza.com/')">
+                                <img src="./assets/videoicon/videoicon03.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                E-NEXCO DoRaPuRa
+                            </div>
+                        </div>
+                    </div>
+                    <div class="videorow">
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://youtu.be/cE4PZh3_WwE')">
+                                <img src="./assets/videoicon/videoicon04.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                首都高 assetto corsa
+                            </div>
+                        </div>
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://supertaste.tvbs.com.tw/travel/321663')">
+                                <img src="./assets/videoicon/videoicon05.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                景點介紹
+                            </div>
+                        </div>
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://japantravel.navitime.com/zh-tw/area/jp/guide/NTJinfo0006-zh-tw/')">
+                                <img src="./assets/videoicon/videoicon06.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                路線介紹
+                            </div>
+                        </div>
+                    </div>
+                    <div class="videorow">
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://www.sohu.com/a/168592564_364352')">
+                                <img src="./assets/videoicon/videoicon07.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                首都高故事
+                            </div>
+                        </div>
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://www.ceci.org.tw/modules/article-content.aspx?s=22&i=332')">
+                                <img src="./assets/videoicon/videoicon08.png" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                首都高近代工程
+                            </div>
+                        </div>
+                        <div class="video">
+                            <div class="yticon" onclick="go('https://www.mobile01.com/topicdetail.php?f=179&t=485232')">
+                                <img src="./assets/videoicon/videoicon09.jpg" class="videopic">
+                            </div>
+                            <div class="videoword">
+                                首都高zero遊戲心得
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="section10" class="section">
+                <div class="pus">
+                    <div>
+                        <label for="who">id:</label>
+                        <input type="text" id="who" placeholder="輸入留言者名稱">
+                    </div>
+                    <div>
+                        <label for="pic">頭像:</label>
+                        <input type="text" id="pic" placeholder="輸入圖片 URL">
+                    </div>  
+                    <div>
+                        <label for="comment">留言內容:</label>
+                    <textarea id="comment" placeholder="輸入留言內容"></textarea>
+                    </div>
+                    <div>
+                        <button onclick="updatecomment()" class="submitbtn">發布</button>
+                    </div>
+                    
+                </div>
+                <div class="comment-bar">
+                    <div class="comment">
+                        <div>
+                            <img src="assets/head10.png" alt="?"  width="100%" height="100%"">
+                        </div>
+                        <div class="usercom">
+                            <strong style=" display: block;">蛇老大</strong>
+                            <br>
+                            <span>謝謝 已經買機票了</span>
+                        </div>
+                    </div>
+                </div>
+
+                
+                
+
+            </section>
+        </main>
+
+
+    </body>
+</html>
