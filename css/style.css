@@ -13,9 +13,11 @@ header {
     align-items: flex-end; 
     height: 200px;
     background: 
-        linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)),
-        url('/assets/header_expressway.jpg') center/cover no-repeat;
-    background-blend-mode: overlay; /*gpt*/
+        linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+    background-blend-mode: overlay; 
+    background-position: center;  /* 设置背景图片的定位为居中 */
+    background-size: cover;       /* 设置背景图片自适应容器大小并保持比例 */
+    background-repeat: no-repeat; /* 禁止背景图片重复 */
 
 }
 
